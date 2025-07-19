@@ -1,39 +1,87 @@
 # Vehicle Parking Management System
 
-A Spring Boot-based web application designed to handle vehicle parking slot management, booking operations, payment processing, and reporting.
+A Spring Boot web application to manage vehicle parking slots, bookings, payments, and reports.
 
 ---
 
 ## Project Overview
 
-This system allows users to:
-- Register themselves and their vehicles.
-- Book parking slots efficiently.
-- Prevent double bookings and overlapping slots.
-- Process and track payments.
-- Generate usage and activity reports.
+The system allows:
+- User registration and vehicle management.
+- Parking slot booking and prevention of overlapping bookings.
+- Payment tracking.
+- Reporting functionalities.
 
 ---
 
-## Key Modules
+## Database Design (Apache Derby)
 
-- **entity/** : JPA Entity classes (`User`, `Vehicle`, `Booking`, `ParkingSlot`, `Payment`, `Report`).
-- **repository/** : Spring Data JPA Repositories to interact with Apache Derby database.
-- **controller/** : REST Controllers to expose application APIs.
-- **dto/** : Data Transfer Objects to manage incoming and outgoing data.
-- **service/** : Business logic implementation.
-- **exception/** : Custom exception handling for clear error reporting.
+**Database Schema**: `VehicleManagement`
+
+### Tables and Mappings:
+
+| Table Name      | Entity Class   | Relationships / Mappings                          |
+|-----------------|---------------|----------------------------------------------------|
+| Vuser           | User.java     | - One-to-Many with `Vehicle`<br> - One-to-Many with `Booking`<br> - One-to-Many with `Report` |
+| Vehicle         | Vehicle.java  | - Many-to-One with `User`<br> - One-to-Many with `Booking` |
+| Booking         | Booking.java  | - Many-to-One with `User`<br> - Many-to-One with `Vehicle`<br> - Many-to-One with `ParkingSlot`<br> - One-to-One with `Payment` |
+| ParkingSlot     | ParkingSlot.java | - One-to-Many with `Booking` |
+| Payment         | Payment.java  | - One-to-One with `Booking` |
+| Report          | Report.java   | - Many-to-One with `User` |
+
+---
+
+## Entity Mappings
+
+- **User.java**
+  - Primary Key: `userId`
+  - Fields: `name`, `email`, `password`
+  - Relationships:
+    - One User → Many Vehicles
+    - One User → Many Bookings
+    - One User → Many Reports
+
+- **Vehicle.java**
+  - Primary Key: `vehicleId`
+  - Fields: `licensePlate`, `type`
+  - Relationships:
+    - Many Vehicles → One User
+
+- **Booking.java**
+  - Primary Key: `bookingId`
+  - Fields: `startTime`, `endTime`
+  - Relationships:
+    - Many Bookings → One User
+    - Many Bookings → One Vehicle
+    - Many Bookings → One ParkingSlot
+    - One Booking → One Payment
+
+- **ParkingSlot.java**
+  - Primary Key: `slotId`
+  - Fields: `type`, `status`
+
+- **Payment.java**
+  - Primary Key: `paymentId`
+  - Fields: `amount`, `status`
+  - Relationships:
+    - One Payment → One Booking
+
+- **Report.java**
+  - Primary Key: `reportId`
+  - Fields: `description`
+  - Relationships:
+    - Many Reports → One User
 
 ---
 
 ## Technologies Used
 
-- Java 17+
-- Spring Boot
-- Spring Data JPA (Hibernate)
-- Apache Derby (Database)
-- Lombok (for reducing boilerplate)
-- Maven (build tool)
+- **Java 17+**
+- **Spring Boot**
+- **Spring Data JPA (Hibernate)**
+- **Apache Derby (Database)**
+- **Lombok**
+- **Maven**
 
 ---
 
