@@ -1,34 +1,44 @@
 # Vehicle Parking Management System
 
-A Spring Boot project for managing vehicle parking, booking slots, handling payments, and generating reports. This project uses Hibernate/JPA for ORM and follows a modular entity structure.
+A Spring Boot-based web application designed to handle vehicle parking slot management, booking operations, payment processing, and reporting.
 
-##  Project Structure
+---
 
-- **entity/**
-  - `Booking.java` – Manages slot bookings.
-  - `ParkingSlot.java` – Tracks slot availability and type.
-  - `Payment.java` – Handles payment details.
-  - `Report.java` – Generates user-related reports.
-  - `User.java` – Stores user registration/login details.
-  - `Vehicle.java` – Manages registered vehicles.
+## Project Overview
 
-## Features
+This system allows users to:
+- Register themselves and their vehicles.
+- Book parking slots efficiently.
+- Prevent double bookings and overlapping slots.
+- Process and track payments.
+- Generate usage and activity reports.
 
-- Vehicle registration (with license plate and type).
-- Slot booking with start/end time.
-- Payment handling (Paid/Pending).
-- Reports generation for users.
-- Input validation using annotations.
+---
 
-##  Technologies
+## Key Modules
 
-- **Java 17+**
-- **Spring Boot**
-- **Spring Data JPA (Hibernate)**
-- **MySQL/PostgreSQL** (configurable)
-- **Lombok** (for reducing boilerplate)
-- **Jakarta Persistence API**
+- **entity/** : JPA Entity classes (`User`, `Vehicle`, `Booking`, `ParkingSlot`, `Payment`, `Report`).
+- **repository/** : Spring Data JPA Repositories to interact with Apache Derby database.
+- **controller/** : REST Controllers to expose application APIs.
+- **dto/** : Data Transfer Objects to manage incoming and outgoing data.
+- **service/** : Business logic implementation.
+- **exception/** : Custom exception handling for clear error reporting.
 
-##  Database Schema
+---
 
-All tables are created under schema:
+## Technologies Used
+
+- Java 17+
+- Spring Boot
+- Spring Data JPA (Hibernate)
+- Apache Derby (Database)
+- Lombok (for reducing boilerplate)
+- Maven (build tool)
+
+---
+
+## Setup Instructions
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/TejaswiniDama22/vehicle-parking-management.git
