@@ -39,9 +39,9 @@ Key Features:
     
      Fare Calculation: Calculates cost based on duration and vehicle type:
 
-  CAR: ₹50/hour
-  
-  BIKE: ₹30/hour
+                                                              CAR: ₹50/hour
+                                                              
+                                                              BIKE: ₹30/hour
   
   Response:
   Returns a ResponseData object with status, message, and a BookingSummary (booking ID, type, hours, and fare).
